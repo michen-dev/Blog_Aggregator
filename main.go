@@ -12,7 +12,7 @@ func main() {
 	// Read current config JSON file
 	cfg, err := config.Read()
 	if err != nil {
-		log.Fatal("Failed reading: %v", err)
+		log.Fatalf("Failed reading: %v", err)
 	}
 	
 	// Initialize state
