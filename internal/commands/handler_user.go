@@ -68,18 +68,6 @@ func HandlerRegister(s *State, cmd Command) error {
 	return nil
 }
 
-func HandlerReset(s *State, cmd Command) error {
-	if len(cmd.Args) != 0 {
-		return fmt.Errorf("Usage: %s", cmd.Name)
-	}
-
-	err := s.Db.Reset(context.Background())
-	if err != nil {
-		return fmt.Errorf("Failed resetting")
-	}
-	return nil
-}
-
 func HandlerUsers(s *State, cmd Command) error {
 	if len(cmd.Args) != 0 {
 		return fmt.Errorf("Usage: %s", cmd.Name)

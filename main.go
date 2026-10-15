@@ -35,6 +35,9 @@ func main() {
 	cmds.Register("register", commands.HandlerRegister)
 	cmds.Register("reset", commands.HandlerReset)
 	cmds.Register("users", commands.HandlerUsers)
+	cmds.Register("agg", commands.HandlerRSS)
+	cmds.Register("addfeed", commands.HandlerAddFeed)
+	cmds.Register("feeds", commands.HandlerFeeds)
 
 	// Receive CLI args & Build input cmd
 	if len(os.Args) < 2 {
