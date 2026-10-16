@@ -28,7 +28,7 @@ func main() {
 	state.Cfg = &cfg
 	state.Db = &dbQueries
 
-	// Initialize cmds and register login handler
+	// Initialize cmds and register commands
 	var cmds commands.Commands
 	cmds.Commands = make(map[string]func(*commands.State, commands.Command) error)
 	cmds.Register("login", commands.HandlerLogin)
@@ -36,8 +36,11 @@ func main() {
 	cmds.Register("reset", commands.HandlerReset)
 	cmds.Register("users", commands.HandlerUsers)
 	cmds.Register("agg", commands.HandlerRSS)
-	cmds.Register("addfeed", commands.HandlerAddFeed)
+	cmds.Register("addfeed", commands.MiddlewareLoggedIn(commands.HandlerAddFeed))
 	cmds.Register("feeds", commands.HandlerFeeds)
+	cmds.Register("follow", commands.MiddlewareLoggedIn(commands.HandlerFollow))
+	cmds.Register("following", commands.MiddlewareLoggedIn(commands.HandlerFollowing))
+	cmds.Register("unfollow", commands.MiddlewareLoggedIn(commands.HandlerUnfollow))
 
 	// Receive CLI args & Build input cmd
 	if len(os.Args) < 2 {
